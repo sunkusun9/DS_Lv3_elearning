@@ -12,7 +12,7 @@ output: html_notebook
 [Titanic](https://www.kaggle.com/competitions/titanic/data) 탑승객의 생존 유무를 담은 데이터셋 입니다.
 
 | Data        | Description                                 | Dictionary                                     |
-|:---------------|:--------------------------|:----------------------------|
+|:------------|:--------------------------------------------|:-----------------------------------------------|
 | PassengerId | Passenger Id, Index                         |                                                |
 | Survived    | Survival                                    | 0 = No, 1 = Yes                                |
 | Pclass      | Ticket class                                | 1 = 1st, 2 = 2nd, 3 = 3rd                      |
@@ -43,7 +43,7 @@ df_titanic <- read_csv('../data/titanic.csv', col_types = cols())
 [Wild blueberry](https://data.mendeley.com/datasets/p5hvjzsvn8/1) 야생 블루베리의 수확량을 시뮬레이션한 데이터셋입니다.
 
 | Features             | Unit        | Description                                                                                        |
-|:------------|:------------|:---------------------------------------------|
+|:---------------------|:------------|:---------------------------------------------------------------------------------------------------|
 | Row#                 |             | Index                                                                                              |
 | Clonesize            | m2          | The average blueberry clone size in the field                                                      |
 | Honeybee             | bees/m2/min | Honeybee density in the field                                                                      |
@@ -260,6 +260,12 @@ Age'의 결측값을 'Pclass', 'Sex', 'SibSp', 'Parch', 'Fare', 'Embarked' 를 �
 
 ```{R}
 df_titanic <- read_csv('../data/titanic.csv', col_types = cols())
+
+get_mode <- function(v) {
+  tbl <- table(na.omit(v))
+  names(tbl)[which.max(tbl)]
+}
+
 # Embarked는 최빈값으로 결측을 처리합니다.
 df_titanic <- df_titanic %>%
   mutate(Embarked = ifelse(is.na(Embarked), get_mode(df_titanic$Embarked), Embarked))
@@ -357,8 +363,6 @@ df_berry2
 하한값을 벗어난 경우 하한값으로 대체하고
 
 상한값을 벗어나 경우 상한값으로 대체시킵니다.
-
-**pd.Seris.clip**
 
 **[Ex.5]**
 

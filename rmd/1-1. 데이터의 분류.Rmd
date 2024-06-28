@@ -14,7 +14,7 @@ output: html_notebook
 [Titanic](https://www.kaggle.com/competitions/titanic/data) 탑승객의 생존 유무를 담은 데이터셋 입니다.
 
 | Data        | Description                                 | Dictionary                                     |
-|:---------------|:--------------------------|:----------------------------|
+|:------------|:--------------------------------------------|:-----------------------------------------------|
 | PassengerId | Passenger Id, Index                         |                                                |
 | Survived    | Survival                                    | 0 = No, 1 = Yes                                |
 | Pclass      | Ticket class                                | 1 = 1st, 2 = 2nd, 3 = 3rd                      |

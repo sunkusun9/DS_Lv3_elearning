@@ -11,25 +11,22 @@ output: html_notebook
 
 [Titanic](https://www.kaggle.com/competitions/titanic/data) 탑승객의 생존 유무를 담은 데이터셋 입니다.
 
-|Data|Description|Dictionary|
-|:----|:----------|:---|
-|PassengerId|Passenger Id, Index||
-|Survived|Survival|0 = No, 1 = Yes|
-|Pclass|Ticket class|1 = 1st, 2 = 2nd, 3 = 3rd|
-|Name|Name| |
-|Sex|Sex| |
-|Age|Age in years| |
-|Sibsp|# of siblings / spouses aboard the Titanic| |
-|Parch|# of parents / children aboard the Titanic| |
-|Ticket|Ticket number| |
-|Fare|Passenger fare| |
-|Cabin|Cabin number| |
-|Embarked|Port of Embarkation|C = Cherbourg, Q = Queenstown, S = Southampton|
-
+| Data        | Description                                 | Dictionary                                     |
+|:------------|:--------------------------------------------|:-----------------------------------------------|
+| PassengerId | Passenger Id, Index                         |                                                |
+| Survived    | Survival                                    | 0 = No, 1 = Yes                                |
+| Pclass      | Ticket class                                | 1 = 1st, 2 = 2nd, 3 = 3rd                      |
+| Name        | Name                                        |                                                |
+| Sex         | Sex                                         |                                                |
+| Age         | Age in years                                |                                                |
+| Sibsp       | \# of siblings / spouses aboard the Titanic |                                                |
+| Parch       | \# of parents / children aboard the Titanic |                                                |
+| Ticket      | Ticket number                               |                                                |
+| Fare        | Passenger fare                              |                                                |
+| Cabin       | Cabin number                                |                                                |
+| Embarked    | Port of Embarkation                         | C = Cherbourg, Q = Queenstown, S = Southampton |
 
 다양한 형식의 데이터를 가지고 있으며, 여러 가지 아이디어를 생각하고 시도할 만한 요소가 많게끔 기획된 데이터셋입니다.
-
-
 
 ```{r}
 # readr 패키지 로드
@@ -42,7 +39,6 @@ df_titanic <- read_csv('../data/titanic.csv', col_types = cols())
 df_titanic
 ```
 
-
 ## 1. 수치형 데이터
 
 ### 정규화(Normalize)
@@ -51,26 +47,23 @@ df_titanic
 
 > $X_{new} = \frac{X - min(X)}{max(X) - min(X)}$
 
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
-
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 **sklearn.preprocessing.MinMaxScaler**
 
 **주요 파라메터**
-    
-|파라메터명|기능|
-|-----|-----|
-|feature_range|(최소값, 최대값) 형태의 tuple|
-</div>
 
-**[Ex.1]** 
+| 파라메터명    | 기능                          |
+|---------------|-------------------------------|
+| feature_range | (최소값, 최대값) 형태의 tuple |
+:::
 
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
+**[Ex.1]**
 
-df_titanic에서 Age와 Fare의 최소값은 0, 최대값이 1이 되도록 변환합니다. 
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
+df_titanic에서 Age와 Fare의 최소값은 0, 최대값이 1이 되도록 변환합니다.
 
-그리고 변환된 값을 변수명 뒤에 '_n'을 붙여 Age_n, Fare_n으로 저장합니다.
-    
-</div>
+그리고 변환된 값을 변수명 뒤에 '\_n'을 붙여 Age_n, Fare_n으로 저장합니다.
+:::
 
 ```{R}
 library(caret)
@@ -83,29 +76,25 @@ preProcValues <- preProcess(df_titanic[, mm_cols], method = c("range"))
 
 print(preProcValues)
 ```
+
 ```{R}
 mm_cols_n <- paste0(mm_cols, "_n")
 df_titanic[mm_cols_n] <- predict(preProcValues, df_titanic[, mm_cols])
 head(df_titanic[mm_cols_n])
 ```
 
-
 ```{R}
 df_titanic %>%
   summarise(across(all_of(mm_cols_n), list(min = min, max = max), na.rm = TRUE))
 ```
 
-**[Ex.2]** 
+**[Ex.2]**
 
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
+df_titanic에서 Age와 Fare의 최소값은 -1, 최대값이 1이 되도록 변환합니다.
 
-df_titanic에서 Age와 Fare의 최소값은 -1, 최대값이 1이 되도록 변환합니다. 
-
-그리고 변환된 값을 변수명 뒤에 '_n'을 붙여 Age_n, Fare_n으로 저장합니다.
-
-</div>
-
-
+그리고 변환된 값을 변수명 뒤에 '\_n'을 붙여 Age_n, Fare_n으로 저장합니다.
+:::
 
 ```{R}
 # 정규화 대상 컬럼
@@ -129,18 +118,17 @@ df_titanic %>%
 
 ### 표준화(Standardize)
 
-- 변수의 평균이 0, 표준편차가 1이 되도록 변환합니다.
+-   변수의 평균이 0, 표준편차가 1이 되도록 변환합니다.
 
-> $X_{std}= \frac{X - \mu}{\sigma} $
-
+> \$X\_{std}= \frac{X - \mu}{\sigma} \$
 
 **[Ex.3]**
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
+
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 df_titanic에서 Age와 Fare를 표준화합니다.
 
-
-그리고 변환된 값을 변수명 뒤에 '_s'을 붙여 Age_s, Fare_s으로 저장합니다.
-</div>
+그리고 변환된 값을 변수명 뒤에 '\_s'을 붙여 Age_s, Fare_s으로 저장합니다.
+:::
 
 ```{R}
 # 표준화 대상 컬럼
@@ -161,59 +149,51 @@ df_titanic %>%
 
 **정규화와 표준화의 효과**
 
-* 회귀 분석시 정규화와 표준화를 통해 변수의 스케일을 균일화하여, 독립변수가 종속변수에 미치는 정도를 파악하기 쉽게 합니다.
+-   회귀 분석시 정규화와 표준화를 통해 변수의 스케일을 균일화하여, 독립변수가 종속변수에 미치는 정도를 파악하기 쉽게 합니다.
 
+-   Ridge와 Lasso와 같은 모수의 크기에 대해 제약을 가하는 모델에서 규제가 균일하게 적용되도록 합니다.
 
-* Ridge와 Lasso와 같은 모수의 크기에 대해 제약을 가하는 모델에서 규제가 균일하게 적용되도록 합니다.
-
-
-* Gradient Descent와 같은 공간 탐색 기반의 알고리즘에서 학습률과 변수들간의 영향이 균일하도록 합니다.
-
+-   Gradient Descent와 같은 공간 탐색 기반의 알고리즘에서 학습률과 변수들간의 영향이 균일하도록 합니다.
 
 ### 거듭제곱 변환(Power Transformation)
 
-- 변수의 분포를 우측 또는 좌측으로 치우친 정도를 조정합니다.
+-   변수의 분포를 우측 또는 좌측으로 치우친 정도를 조정합니다.
 
+-   거듭수를 나타내는 파라메터 $\lambda$에 따라 변환함수가 달라집니다.
 
-- 거듭수를 나타내는 파라메터 $\lambda$에 따라 변환함수가 달라집니다.
+| $$\lambda$$       | 거듭 제곱 함수            |
+|-------------------|---------------------------|
+| $$\lambda \ne 0$$ | $$X_{new} = X^{\lambda}$$ |
+| $$\lambda = 0$$   | $$X_{new} = log(X)$$      |
 
-|$$\lambda$$|거듭 제곱 함수|
-|-----|------|
-|$$\lambda \ne 0$$|$$X_{new} = X^{\lambda}$$|
-|$$\lambda = 0$$|$$X_{new} = log(X)$$|
+-   변환 효과
 
-- 변환 효과
+|               $$\lambda$$ | 효과                                                                           |
+|--------------------------:|:-------------------------------------------------------------------------------|
+| $$\lambda = 0$$(log 변환) | 우측 꼬리의 길이를 줄여, 우측으로 치우치게 분포하도록 변환합니다.              |
+|           $$\lambda > 1$$ | 우측 꼬리의 길이를 늘립니다. $\lambda$가 커질수록 우측 꼬리의 길이가 커집니다. |
+|       $$0 < \lambda < 1$$ | 우측 꼬리의 길이를 줄여서 우측으로 치우친 형태의 분포로 변환 됩니다.           |
+|           $$\lambda < 0$$ | 역수로 변환 됩니다.                                                            |
 
-|$$\lambda$$|효과|
-|------:|:-----|
-|$$\lambda = 0$$(log 변환)|우측 꼬리의 길이를 줄여, 우측으로 치우치게 분포하도록 변환합니다.|
-|$$\lambda > 1$$|우측 꼬리의 길이를 늘립니다. $\lambda$가 커질수록 우측 꼬리의 길이가 커집니다.|
-|$$0 < \lambda < 1$$|우측 꼬리의 길이를 줄여서 우측으로 치우친 형태의 분포로 변환 됩니다.|
-|$$\lambda < 0$$|역수로 변환 됩니다.|
+**[Ex.4]**
 
-**[Ex.4]** 
-
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
-
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 df_titanic λ=[-2, -1, -0.5, 0, 0.5, 1, 1.5, 2]에 따라 Power Transform된 Fare의 분포를 히스토그램으로 출력해봅니다.
-    
-</div>
+:::
 
-※ Remark 
+※ Remark
 
-<div style="border: 1px solid #ddd; padding: 10px;">
-
+::: {style="border: 1px solid #ddd; padding: 10px;"}
 $\lambda$가 0인 경우 log변환을 하게되는데 Fare의 최소값이 0이므로,
 
 Fare가 0인 경우가 존재합니다. 이 때 log 변환은 성립하지 않게 됩니다.
 
-이 때, log의 값이 미지수가 되어 버립니다. 
+이 때, log의 값이 미지수가 되어 버립니다.
 
 이럴 경우 임의의 수를 더하여 0을 log로 취하는 것을 방지합니다.
 
 변환 후 최소값이 0이 되도록 $log(X + 1)$로 변환합니다.
-    
-</div>
+:::
 
 ```{R}
 library(ggplot2)
@@ -247,17 +227,13 @@ for (lam in lams) {
 grid.arrange(grobs = plots, ncol = 4)
 ```
 
+**[Ex.5]**
 
-**[Ex.5]** 
-
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
-    
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 df_titanic λ=[-2, -1, -0.5, 0, 0.5, 1, 1.5, 2]에 따라 Power Transform된 Age의 분포를 히스토그램으로 출력해봅니다.
-    
-이 때 Age의 결측치는 제외합니다.
-    
-</div>
 
+이 때 Age의 결측치는 제외합니다.
+:::
 
 ```{R}
 library(ggplot2)
@@ -290,33 +266,31 @@ for (lam in lams) {
 # 여러 히스토그램을 하나의 그래프에 배치합니다.
 grid.arrange(grobs = plots, ncol = 4)
 ```
+
 ### Box-Cox 변환(Box-Cox Transformation)
 
-- Power Transformation을 기반으로한 변환으로 정규 분포에 가까운 형태(정규 분포를 따르게 되는 것은 보장하지 않습니다.)로 변환합니다.
+-   Power Transformation을 기반으로한 변환으로 정규 분포에 가까운 형태(정규 분포를 따르게 되는 것은 보장하지 않습니다.)로 변환합니다.
 
+-   $\lambda$에 따라 변환함수가 달라집니다. 데이터에서 정규분포와 가깝게 해주는 $\lambda$를 찾아줍니다
 
-- $\lambda$에 따라 변환함수가 달라집니다. 데이터에서 정규분포와 가깝게 해주는 $\lambda$를 찾아줍니다
+| $$\lambda$$       | 거듭 제곱 함수                                      |
+|-------------------|-----------------------------------------------------|
+| $$\lambda \ne 0$$ | $$X^{(\lambda)} = \frac{X^{\lambda} - 1}{\lambda}$$ |
+| $$\lambda = 0$$   | $$X_{new} = log(X)$$                                |
 
-|$$\lambda$$|거듭 제곱 함수|
-|-----|------|
-|$$\lambda \ne 0$$|$$X^{(\lambda)} = \frac{X^{\lambda} - 1}{\lambda}$$|
-|$$\lambda = 0$$|$$X_{new} = log(X)$$|
-
-- $\lambda$는 아래의 손실 함수를 사용하여 구해집니다.
+-   $\lambda$는 아래의 손실 함수를 사용하여 구해집니다.
 
 > $l(\lambda) = -\frac{n}{2}ln\left( \frac{1}{n}\sum_{j=1}^n\left( x_j^{(\lambda)} - \bar{x_j}^{(\lambda)}\right)^2 \right) + (\lambda - 1)\sum_{j=1}^nx_j$
 
-손실 함수를 최소화하는 $\lambda$를 구하여 변환 합니다. 
+손실 함수를 최소화하는 $\lambda$를 구하여 변환 합니다.
 
-**[Ex.6]** 
+**[Ex.6]**
 
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
-
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 df_titanic λ=[-2, -1, -0.5, 0, 0.5, 1, 2]에 따라 Power Transform된 Age의 분포를 히스토그램으로 출력해봅니다. 이 때 Age의 결측치는 제외합니다.
 
 여기에 box-cox Transformation의 결과까지 추가합니다.
-    
-</div>
+:::
 
 ```{R}
 library(MASS)
@@ -360,8 +334,6 @@ for (lam in lams) {
 grid.arrange(grobs = plots, ncol = 4)
 ```
 
-
-
 ## 2. 범주형 데이터
 
 ### 가변수화(One-Hot Encoding, 지시변수화)
@@ -370,44 +342,19 @@ grid.arrange(grobs = plots, ncol = 4)
 
 예를들어, apple, banana, peach 범주들로 구성된 변수 **fruit**을 가변수해봅니다.
 
-<table><tr><td>
++----------------------------------------------------------------------+---+---------------------------------------------------------------------------------------------------------------------------+
+| \|fruit\| \|-----\| \|apple\| \|banana\| \|peach\| \|...\| \|apple\| | ▷ | \|fruit_apple\|fruit_banana\|fruit_peach\| \|----\|----\|----\| \|1\|0\|0\| \|0\|1\|0\| \|0\|0\|1\| \|.....\| \|1\|0\|0\| |
++----------------------------------------------------------------------+---+---------------------------------------------------------------------------------------------------------------------------+
 
-|fruit|
-|-----|
-|apple|
-|banana|
-|peach|
-|...|
-|apple|
+**[Ex.7]**
 
-</td><td>
-
-▷
-
-</td><td>
-
-|fruit_apple|fruit_banana|fruit_peach|
-|----|----|----|
-|1|0|0|
-|0|1|0|
-|0|0|1|
-|.....|
-|1|0|0|
-
-</td></tr></table>
-    
-
-**[Ex.7]** 
-
-<div style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;">
-
+::: {style="border: 1px solid #ddd; padding: 12px; margin-top: 10px;"}
 df_titanic에서 Pclass와 Embarked를 가변수화 합니다.
 
 Embarked의 결측은 최빈값으로 대체합니다.
 
 가변수화한 후 새로운 데이터프레임 을 만듭니다.
-    
-</div>
+:::
 
 ```{R}
 # 더미 변수를 생성하는 함수
