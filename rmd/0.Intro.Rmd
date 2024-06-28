@@ -51,8 +51,45 @@ $A = \begin{bmatrix} a_{1,1} & a_{1,2} & \ldots & a_{1, n} \\ a_{2, 1} & a_{2, 1
 $A^T B = \begin{bmatrix} \sum_{i=1}^na_{1, i}b_{i, 1} & \sum_{i=1}^na_{1, i}b_{i, 2} & \ldots & \sum_{i=1}^na_{1, i}b_{i, m} \\ \sum_{i=1}^na_{2, i}b_{i, 1} & \sum_{i=1}^na_{2, i}b_{i, 2} & \ldots & \sum_{i=1}^na_{2, i}b_{i, m} \\ \vdots & \vdots & \ddots & \vdots \\ \sum_{i=1}^na_{m, i}b_{i, 1} & \sum_{i=1}^na_{m, i}b_{i, 2} & \ldots & \sum_{i=1}^na_{m, i}b_{i, m} \end{bmatrix}$
 :::
 
+### R 패키지 설치
+
+예제에서 사용하고 있는 R 패키지를 설치합니다.
+
 ```{R}
-install.packages("readr")
+install.packages('readr')
+install.packages('dplyr')
+install.packages('tidyr')
+install.packages("zoo")
+install.packages("ggplot2")
+install.packages('gridExtra')
+install.packages("recipes")
+install.packages("randomForest")
+install.packages("caret")
+install.packages("MASS")
+install.packages("stats")
+install.packages("nortest")
+install.packages('tseries')
+install.packages('e1071')
+install.packages('MLmetrics')
+install.packages('forecast')
+install.packages('tidytext')
+install.packages('tm')
+install.packages('SnowballC')
+install.packages('text2vec')
+install.packages('Matrix')
+install.packages('Slam')
+install.packages('mlbench')
+install.packages('ROSE')
+install.packages("UBL")
+install.packages('glmnet')
+install.packages('ada')
+install.packages('xgboost')
+install.packages('cluster')
+install.packages('mclust')
+install.packages("jpeg")
+install.packages("Rtsne")
+install.packages("dbscan")
+install.packages("isotree")
 ```
 
 ## 3. 데이터셋 소개
@@ -62,7 +99,7 @@ install.packages("readr")
 [Titanic](https://www.kaggle.com/competitions/titanic/data) 탑승객의 생존 유무를 담은 데이터셋 입니다.
 
 | Data        | Description                                 | Dictionary                                     |
-|:------------|:--------------------------------------------|:-----------------------------------------------|
+|:---------------|:--------------------------|:----------------------------|
 | PassengerId | Passenger Id, Index                         |                                                |
 | Survived    | Survival                                    | 0 = No, 1 = Yes                                |
 | Pclass      | Ticket class                                | 1 = 1st, 2 = 2nd, 3 = 3rd                      |
@@ -93,7 +130,7 @@ head(df_titanic)
 [Space Titanic](https://www.kaggle.com/competitions/spaceship-titanic) 생존자 데이터셋을 모태로하여 미래의 우주 여행선을 주제로 만들어진, 데이터 분석 입문용 데이터셋입니다.
 
 | variable name                                     | description                                                                                                                                                                                                                       |
-|---------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|----------------|:------------------------------------------------------|
 | PassengerId                                       | A unique Id for each passenger. Each Id takes the form gggg_pp where gggg indicates a group the passenger is travelling with and pp is their number within the group. People in a group are often family members, but not always. |
 | HomePlanet                                        | The planet the passenger departed from, typically their planet of permanent residence.                                                                                                                                            |
 | CryoSleep                                         | Indicates whether the passenger elected to be put into suspended animation for the duration of the voyage. Passengers in cryosleep are confined to their cabins.                                                                  |
@@ -120,7 +157,7 @@ head(df_space)
 [Wild blueberry](https://data.mendeley.com/datasets/p5hvjzsvn8/1) 야생 블루베리의 수확량을 시뮬레이션한 데이터셋입니다.
 
 | Features             | Unit        | Description                                                                                        |
-|:---------------------|:------------|:---------------------------------------------------------------------------------------------------|
+|:------------|:------------|:---------------------------------------------|
 | Row#                 |             | Index                                                                                              |
 | clonesize            | m2          | The average blueberry clone size in the field                                                      |
 | honeybee             | bees/m2/min | Honeybee density in the field                                                                      |
@@ -205,7 +242,7 @@ head(df_spam)
 주요 변수 설명
 
 | Name    | Type    | Description                                                      |
-|---------|---------|------------------------------------------------------------------|
+|------------|------------|------------------------------------------------|
 | patient | integer | patient no                                                       |
 | cancer  | binary  | AML: acute myeloid leukemia<br/>ALL:acute lymphoblastic leukemia |
 | train   | binary  | 학습 데이터 여부                                                 |
@@ -219,80 +256,4 @@ df_gene <- read_csv('../data/gene.csv', col_types = cols())
 
 # 데이터의 첫 몇 행을 출력
 head(df_gene)
-```
-
-### Dinosaur List
-
-[공룡이름 데이터셋](https://www.kaggle.com/datasets/kumazaki98/dinosaur-list)
-
-| Name      | Type    | Description |
-|-----------|---------|-------------|
-| Name      | string  | 영문 이름   |
-| Period    | nominal | 서식 시기   |
-| Diet      | nominal | 식성        |
-| Country   | nominal | 발견 국가   |
-| Name_kr   | string  | 한글 이름   |
-| Continent | nominal | 발견 대륙   |
-
-철자 속에 있는 의미를 추출하여 활용해보기 위해 선정한 데이터 입니다.
-
-```{R}
-
-df_dino = read_csv('../data/dino_cleaned.csv', col_types = cols())
-head(df_dino)
-
-```
-
-### MoiveLens 100K
-
-[MovieLens 100K](https://grouplens.org/datasets/movielens/100k/)
-
-영화 정보: movies_100k.csv
-
-| Name                            | Type    | Description |
-|---------------------------------|---------|-------------|
-| movie id                        | integer | 영화 id     |
-| movie title                     | string  | 영화 제목   |
-| release date                    | string  | 출시 시점   |
-| unknown, Action, Adventure, ... | boolean | 장르 여부   |
-
-사용자 정보: users_100k.csv
-
-| Name       | Type    | Description     |
-|------------|---------|-----------------|
-| user id    | integer | 사용자 id       |
-| age        | integer | 나이            |
-| gender     | boolean | 성별            |
-| occupation | nominal | 직업            |
-| zip code   | nominal | 거주지 우편번호 |
-
-평점 이력: ratings_100k.csv
-
-| Name      | Type    | Description          |
-|-----------|---------|----------------------|
-| user id   | integer | 사용자 id            |
-| item id   | integer | 영화 id              |
-| rating    | integer | 평점                 |
-| timestamp | integer | 평점 시점, timestamp |
-
-카디날리티가 큰 범주형 데이터를 지닌 데이터 셋입니다.
-
-```{R}
-
-df_movie = read_csv('../data/movies_100k.csv', col_types = cols())
-head(df_movie)
-
-```
-
-```{R}
-
-df_user = read_csv('../data/users_100k.csv', col_types = cols())
-head(df_user)
-```
-
-```{R}
-
-df_ratings = read_csv('../data/ratings_100k.csv', col_types = cols())
-head(df_ratings)
-
 ```
