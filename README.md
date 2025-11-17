@@ -62,7 +62,7 @@ e-Learning 제작 이후에 정정이 되거나 내용이 추가 됩니다. 실�
     <tr>
       <td rowspan="8">머신 러닝</td>
       <td>11</td>
-      <td>머신 러닝(Machine learning)</td>
+      <td>머신 러닝</td>
     </tr>
     <tr>
       <td>12</td>
