@@ -7,7 +7,7 @@ e-Learning 제작 이후에 정정이 되거나 내용이 추가 됩니다. 실�
 
 ## 강의 구성
 
-
+<div>
 <table border="1" cellspacing="0" cellpadding="4">
   <thead>
     <tr>
@@ -118,3 +118,4 @@ e-Learning 제작 이후에 정정이 되거나 내용이 추가 됩니다. 실�
     </tr>
   </tbody>
 </table>
+</div>
