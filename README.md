@@ -7,94 +7,108 @@ e-Learning 제작 이후에 정정이 되거나 내용이 추가 됩니다. 실�
 
 ## 강의 구성
 
-
-### 1. 데이터의 이해
-
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-
-**1-1 데이터의 분류**
-
-**1-2 결측치, 이상치 처리**
-
-**1-3 데이터 변환**
-
-**1-4 데이터 시각화**
-    
-</div>
-
-### 2. 확률과 통계
-
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-
-**2-1 확률 개론**
-
-**2-2 확률 분포**
-
-**2-3 가설 검정 개론**
-
-**2-4 가설검정 - 모평균**
-
-**2-5 가설검정 - 모분산, 정규성**
-
-**2-6 범주형 자료 분석, 상관분석**
-
-**2-7 회귀 분석**
-
-**2-8 분산 분석**
-
-</div>
-
-### 3. 머신 러닝 일반
-
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-
-**3-1 머신 러닝(Machine learning)**
-
-**3-2 일반화(Generalization)**
-
-**3-3 학습 알고리즘**
-
-**3-4 클래스 불균형 해소**
-    
-</div>
-
-
-### 4. 지도 학습
-
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-    
-**4-1 선형 모델**
-
-**4-2 의사 결정 나무**
-
-**4-3 나이브 베이즈, K최근접 이웃**
-
-**4-4 SVM**
-
-**4-5 앙상블 모델**
-
-</div>
-
-### 5. 비지도 학습
-
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-    
-**5-1 군집화**
-
-**5-2 차원축소**
-
-**5-3 이상치 탐색**
-
-</div>
-
-### 6. 딥러닝
-    
-<div style="border: 0px solid #ddd; padding: 12px; margin-top: 5px; margin-left:5px">
-
-**6-1 퍼셉트론**
-
-**6-2 인공 신경망**
-
-**6-3 심층 신경망**
-    
+<div>
+<table border="1" cellspacing="0" cellpadding="4">
+  <thead>
+    <tr>
+      <th>구분</th>
+      <th>차시</th>
+      <th>목차</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3">데이터</td>
+      <td>01</td>
+      <td>데이터의 이해</td>
+    </tr>
+    <tr>
+      <td>02</td>
+      <td>데이터의 정제</td>
+    </tr>
+    <tr>
+      <td>03</td>
+      <td>데이터의 변환</td>
+    </tr>
+    <tr>
+      <td rowspan="7">통계</td>
+      <td>04</td>
+      <td>통계와 확률</td>
+    </tr>
+    <tr>
+      <td>05</td>
+      <td>확률 분포</td>
+    </tr>
+    <tr>
+      <td>06</td>
+      <td>가설 검정</td>
+    </tr>
+    <tr>
+      <td>07</td>
+      <td>점 추정과 구간 추정</td>
+    </tr>
+    <tr>
+      <td>08</td>
+      <td>고급 추정법</td>
+    </tr>
+    <tr>
+      <td>09</td>
+      <td>션형 회귀 분석</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>연관성 분석</td>
+    </tr>
+    <tr>
+      <td rowspan="8">머신 러닝</td>
+      <td>11</td>
+      <td>머신 러닝</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>모수적 모델</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>비모수적 모델</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>SVM</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>앙상블 모델</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>군집화</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>차원 축소</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>일반화 기법</td>
+    </tr>
+    <tr>
+      <td rowspan="4">인공신경망</td>
+      <td>19</td>
+      <td>퍼셉트론</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>신경망의 구성</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>경사하강법 심화</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>심층신경망</td>
+    </tr>
+  </tbody>
+</table>
 </div>
